@@ -10,11 +10,24 @@ Public Class Form_Nevegador
             AddHandler WebBrowser1.Navigating, AddressOf EstadoNavigating
             AddHandler WebBrowser1.ProgressChanged, AddressOf EstadoProgressChanged
             AddHandler WebBrowser1.FileDownload, AddressOf EstadoDescargado6
+
+
+
             AddHandler WebBrowser1.DocumentTitleChanged, AddressOf EstadoDocumentTitleChanged
+            AddHandler WebBrowser1.ProgressChanged, AddressOf Estaduado
+
+
 
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub Estaduado(sender As Object, e As WebBrowserProgressChangedEventArgs)
+        
+        Dim valorMax As Integer = e.MaximumProgress
+        Dim valor As Integer = e.CurrentProgress
+
     End Sub
 
     Private Sub EstadoNavigating(sender As Object, e As WebBrowserNavigatingEventArgs)
@@ -69,7 +82,8 @@ Public Class Form_Nevegador
 
     Private Sub EstadoNavigated(sender As Object, e As WebBrowserNavigatedEventArgs)
         Try
-
+            Label_Estado.Visible = False
+            ProgressBar_Progressbar.Visible = False
         Catch ex As Exception
 
         End Try
@@ -77,7 +91,7 @@ Public Class Form_Nevegador
 
     Private Sub Button_Browser_Click(sender As Object, e As EventArgs) Handles Button_Browser.Click
         Try
-           ' WebBrowser1.Navigate(TextBox_URL.Text)
+            WebBrowser1.Navigate(TextBox_URL.Text)
         Catch ex As Exception
 
         End Try
@@ -115,3 +129,4 @@ Public Class Form_Nevegador
         End Try
     End Sub
 End Class
+
