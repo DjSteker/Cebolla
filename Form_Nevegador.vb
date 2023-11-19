@@ -77,7 +77,7 @@ Public Class Form_Nevegador
 
     Private Sub Button_Browser_Click(sender As Object, e As EventArgs) Handles Button_Browser.Click
         Try
-            WebBrowser1.Navigate(TextBox_URL.Text)
+           ' WebBrowser1.Navigate(TextBox_URL.Text)
         Catch ex As Exception
 
         End Try
