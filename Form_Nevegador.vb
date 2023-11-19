@@ -23,21 +23,43 @@ Public Class Form_Nevegador
         End Try
     End Sub
 
-
-    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox_URL.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            WebBrowser1.Navigate(TextBox_URL.Text)
-            ' Código que se ejecuta cuando se presiona la tecla Enter
-        End If
+    Private Sub TextBox_URL_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox_URL.KeyDown
+        Try
+            If e.KeyCode = Keys.Enter Then
+                WebBrowser1.Navigate(TextBox_URL.Text)
+                ' Código que se ejecuta cuando se presiona la tecla Enter
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
-    
+
     Private Sub Estaduado(sender As Object, e As WebBrowserProgressChangedEventArgs)
-        
-        Dim valorMax As Integer = e.MaximumProgress
-        Dim valor As Integer = e.CurrentProgress
+        Try
+            '    ' Obtener el valor del evento ProgressChanged
+            Dim valorMax As Integer = e.MaximumProgress
+            Dim valor As Integer = e.CurrentProgress
+            '    ' Mostrar el valor del evento en una etiqueta
+            Label_Estado.Text = valor & "%"
+        Catch ex As Exception
+
+        End Try
 
     End Sub
+
+
+
+
+    '' Definir el método que se ejecuta cuando se produce el evento ProgressChanged
+    'Private Sub Estaduado(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs)
+    '    ' Obtener el valor del evento ProgressChanged
+    '    Dim valor As Integer = e.ProgressPercentage
+    '    ' Mostrar el valor del evento en una etiqueta
+    '    Label_Estado.Text = valor & "%"
+    'End Sub
+
+
+
 
     Private Sub EstadoNavigating(sender As Object, e As WebBrowserNavigatingEventArgs)
         Try
