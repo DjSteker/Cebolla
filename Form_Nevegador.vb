@@ -23,6 +23,15 @@ Public Class Form_Nevegador
         End Try
     End Sub
 
+
+    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox_URL.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            WebBrowser1.Navigate(TextBox_URL.Text)
+            ' Código que se ejecuta cuando se presiona la tecla Enter
+        End If
+    End Sub
+
+    
     Private Sub Estaduado(sender As Object, e As WebBrowserProgressChangedEventArgs)
         
         Dim valorMax As Integer = e.MaximumProgress
