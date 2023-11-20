@@ -276,9 +276,13 @@ Public Class Form_JSON_ElTiempo
             printJSON(jsonStr)
 
         Catch ex As WebException
-            errorMsg = "Download failed. The response from the server was: " +
-                   CType(ex.Response, HttpWebResponse).StatusDescription
-            Console.WriteLine("Error: " + errorMsg)
+             Try
+                Console.WriteLine("Error: " + ex.Message)
+                errorMsg &= "Download failed. The response from the server was: " + CType(ex.Response, HttpWebResponse).StatusDescription
+                Console.WriteLine("Error: " + errorMsg)
+            Catch ex1 As Exception
+
+            End Try
         End Try
     End Sub
 
