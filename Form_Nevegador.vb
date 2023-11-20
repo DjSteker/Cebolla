@@ -24,17 +24,6 @@ Public Class Form_ExploradorWeb
         End Try
     End Sub
 
-    Private Shared Sub Main(ByVal args As String())
-        Dim ipAddress As System.Net.IPAddress = ipAddress.Parse("127.0.0.1")
-        Dim port As Integer = 8080
-        Dim listener As System.Net.TcpListener = New System.Net.TcpListener(ipAddress, port)
-        listener.Start()
-        Console.WriteLine("Server started on {0}:{1}", ipAddress, port)
-
-        While True
-            Dim client As TcpClient = listener.AcceptTcpClient()
-        End While
-    End Sub
 
 
     Private Sub TextBox_URL_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox_URL.KeyDown
