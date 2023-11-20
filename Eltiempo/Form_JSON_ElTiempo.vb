@@ -6,11 +6,7 @@ Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
 Public Class Form_JSON_ElTiempo
-  
-'registrarse para obtener el valor de las variables , https://www.meteomatics.com
-'OpenWeatherMapAPIKey
-'user
-'pass
+
 
   
     Public Const OpenWeatherMapAPIKey As String = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7" 'https://www.meteomatics.com/en/weather-api/
