@@ -9,7 +9,7 @@ Public Class Form_JSON_ElTiempo
 
 
   
-    Public Const OpenWeatherMapAPIKey As String = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7" 'https://www.meteomatics.com/en/weather-api/
+    Public Const OpenWeatherMapAPIKey As String = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7" ' ejemplo funciono en 2010+o- https://www.meteomatics.com/en/weather-api/
     Public Const OpenWeatherMapEndpoint As String = "https://api.openweathermap.org/data/2.5/weather"
 
     '//api.openweathermap.org/data/2.5/weather?q=London
