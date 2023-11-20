@@ -25,8 +25,12 @@ Public Class Form_JSON_ElTiempo
     '//}
 
 
-    Private Sub Form_JSON_ElTiempo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub Form_JSON_ElTiempo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            WebBrowser1.Navigate("https://api.meteomatics.com/2023-11-20T12:00:00Z/t_2m:C/90,-180_-90,180:600x400/png")
+        Catch ex As Exception
 
+        End Try
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
