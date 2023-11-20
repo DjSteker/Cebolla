@@ -93,7 +93,7 @@ Public Class Form_ExploradorWeb
         Try
             Dim valorMax As Integer = e.MaximumProgress
             Dim valor As Integer = e.CurrentProgress
-            Label_Estado.Text = valor & "%"
+            Label_Estado.Text = ((valor / valorMax)*100) & "%"
         Catch ex As Exception
 
         End Try
@@ -134,7 +134,7 @@ Public Class Form_ExploradorWeb
         Try
             Dim valorMax As Integer = e.MaximumProgress
             Dim valor As Integer = e.CurrentProgress
-            Label_Estado.Text = (valor / valorMax) & "%"
+            Label_Estado.Text = ((valor / valorMax)*100) & "%"
             ProgressBar_Web.Maximum = valorMax
             ProgressBar_Web.Value = valor
         Catch ex As Exception
