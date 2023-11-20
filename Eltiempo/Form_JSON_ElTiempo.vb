@@ -17,7 +17,7 @@ Public Class Form_JSON_ElTiempo
     Public Const OpenWeatherMapEndpoint As String = "https://api.openweathermap.org/data/2.5/weather"
 
     '//api.openweathermap.org/data/2.5/weather?q=London
-    '//http://api.openweathermap.org/data/2.5/weather?q=Ibi,es&APPID=f525f9d88b16c6a17d11f47006e35dd7
+    '//http://api.openweathermap.org/data/2.5/weather?q=Ibi,es&APPID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7
     '//{
     '//"coord":{"lon":-0.57,"lat":38.62},
     '//"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],
