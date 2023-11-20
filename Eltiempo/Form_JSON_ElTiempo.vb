@@ -73,7 +73,7 @@ Public Class Form_JSON_ElTiempo
         Dim user As String
         Dim pass As String
 
-        Dim request As WebRequest = WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=Ibi,es&APPID=f525f9d88b16c6a17d11f47006e35dd7")
+        Dim request As WebRequest = WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=Ibi,es&APPID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7")
         request.Method = "POST"
         Dim postData As String
         postData = ""
