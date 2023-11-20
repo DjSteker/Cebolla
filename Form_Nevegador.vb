@@ -15,10 +15,12 @@ Public Class Form_ExploradorWeb
             AddHandler WebBrowser1.DocumentTitleChanged, AddressOf EstadoDocumentTitleChanged
             AddHandler WebBrowser1.ProgressChanged, AddressOf Estaduado
 
+            WebBrowser1.ScriptErrorsSuppressed = True
+            
             Dim proxy As New System.Net.WebProxy("http://proxyserver:80", True)
             proxy.Credentials = New System.Net.NetworkCredential("username", "password")
             System.Net.WebRequest.DefaultWebProxy = proxy
-
+            
         Catch ex As Exception
 
         End Try
