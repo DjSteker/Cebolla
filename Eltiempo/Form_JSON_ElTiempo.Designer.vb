@@ -27,6 +27,14 @@ Partial Class Form_JSON_ElTiempo
         Me.Button3 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
+        'WebBrowser1
+        '
+        Me.WebBrowser1.Location = New System.Drawing.Point(12, 41)
+        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.WebBrowser1.Name = "WebBrowser1"
+        Me.WebBrowser1.Size = New System.Drawing.Size(776, 405)
+        Me.WebBrowser1.TabIndex = 3
+        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(39, 46)
