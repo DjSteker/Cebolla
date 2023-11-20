@@ -1,6 +1,5 @@
-Public Class Form_Nevegador
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class Form_ExploradorWeb
+    Private Sub Form_ExploradorWeb_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Label_Estado.Text = ""
 
@@ -16,12 +15,27 @@ Public Class Form_Nevegador
             AddHandler WebBrowser1.DocumentTitleChanged, AddressOf EstadoDocumentTitleChanged
             AddHandler WebBrowser1.ProgressChanged, AddressOf Estaduado
 
-
+            Dim proxy As New System.Net.WebProxy("http://proxyserver:80", True)
+            proxy.Credentials = New System.Net.NetworkCredential("username", "password")
+            System.Net.WebRequest.DefaultWebProxy = proxy
 
         Catch ex As Exception
 
         End Try
     End Sub
+
+    Private Shared Sub Main(ByVal args As String())
+        Dim ipAddress As System.Net.IPAddress = ipAddress.Parse("127.0.0.1")
+        Dim port As Integer = 8080
+        Dim listener As System.Net.TcpListener = New System.Net.TcpListener(ipAddress, port)
+        listener.Start()
+        Console.WriteLine("Server started on {0}:{1}", ipAddress, port)
+
+        While True
+            Dim client As TcpClient = listener.AcceptTcpClient()
+        End While
+    End Sub
+
 
     Private Sub TextBox_URL_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox_URL.KeyDown
         Try
@@ -31,6 +45,59 @@ Public Class Form_Nevegador
         Catch ex As Exception
         End Try
     End Sub
+
+
+    Private Sub Button_Nevegar_Click(sender As Object, e As EventArgs) Handles Button_Nevegar.Click
+        Try
+            'WebBrowser1.EncryptionLevel = WebBrowserEncryptionLevel.Mixed
+
+            WebBrowser1.Navigate(TextBox_URL.Text)
+            If CheckBox_Rellamar.Checked Then
+                Timer1.Enabled = True
+            Else
+                Timer1.Enabled = False
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Try
+            WebBrowser1.Navigate(TextBox_URL.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub TextBox_TiempoRefreco_TextChanged(sender As Object, e As EventArgs) Handles TextBox_TiempoRefreco.TextChanged
+        Try
+            Timer1.Interval = TextBox_TiempoRefreco.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub WebBrowser1_Navigated(sender As Object, e As WebBrowserNavigatedEventArgs) Handles WebBrowser1.Navigated
+        Try
+            Label_Encriptacion.Text = WebBrowser1.EncryptionLevel.ToString
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub Label_DNS_Click(sender As Object, e As EventArgs) Handles Label_DNS.Click
+
+    End Sub
+
+    Private Sub SetDns(ByVal hostName As String, ByVal dnsServer As String)
+        Dim processStartInfo As New ProcessStartInfo("cmd.exe")
+        processStartInfo.Arguments = "/c netsh interface ip set dns """ & hostName & """ static " & dnsServer & " primary"
+        processStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        Process.Start(processStartInfo).WaitForExit()
+    End Sub
+
+#Region ""
 
 
     Private Sub Estaduado(sender As Object, e As WebBrowserProgressChangedEventArgs)
@@ -43,10 +110,16 @@ Public Class Form_Nevegador
         End Try
 
     End Sub
-    
+
     Private Sub EstadoNavigating(sender As Object, e As WebBrowserNavigatingEventArgs)
         Try
+            Label_Estado.Visible = True
+            ProgressBar_Web.Visible = True
+        Catch ex As Exception
 
+        End Try
+        Try
+            SetDns(e.Url.Host, TextBox_DNS.Text)
         Catch ex As Exception
 
         End Try
@@ -70,12 +143,18 @@ Public Class Form_Nevegador
 
     Private Sub EstadoProgressChanged(sender As Object, e As WebBrowserProgressChangedEventArgs)
         Try
-
+            Dim valorMax As Integer = e.MaximumProgress
+            Dim valor As Integer = e.CurrentProgress
+            Label_Estado.Text = (valor / valorMax) & "%"
+            ProgressBar_Web.Maximum = valorMax
+            ProgressBar_Web.Value = valor
         Catch ex As Exception
 
         End Try
     End Sub
-    
+
+
+
     Private Sub EstadoDocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs)
         Try
 
@@ -95,19 +174,14 @@ Public Class Form_Nevegador
     Private Sub EstadoNavigated(sender As Object, e As WebBrowserNavigatedEventArgs)
         Try
             Label_Estado.Visible = False
-            ProgressBar_Progressbar.Visible = False
+            ProgressBar_Web.Visible = False
+            Label_Encriptacion.Text = WebBrowser1.EncryptionLevel
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Sub Button_Browser_Click(sender As Object, e As EventArgs) Handles Button_Browser.Click
-        Try
-            WebBrowser1.Navigate(TextBox_URL.Text)
-        Catch ex As Exception
 
-        End Try
-    End Sub
 
     Private Sub EstadoTitulo()
         Try
@@ -140,5 +214,8 @@ Public Class Form_Nevegador
 
         End Try
     End Sub
-End Class
 
+
+#End Region
+
+End Class
